@@ -8,6 +8,7 @@ ipa_number,symbol,symbol_name,description,voicing,place,manner,height,backness,r
 107,c,lower-case C,,voiceless,palatal,plosive,,,,,0063,E2D8
 108,ɟ,barred dotless J,,voiced,palatal,plosive,,,,,025F,E2D9
 109,k,lower-case K,,voiceless,velar,plosive,,,,,006B,E2DE
+110,g,opentail G,,voiced,velar,plosive,,,,,0261,E2DF
 111,q,lower-case Q,,voiceless,uvular,plosive,,,,,0071,E2E6
 112,ɢ,small capital G,,voiced,uvular,plosive,,,,,0262,E2E7
 113,ʔ,glottal stop,,,glottal,plosive,,,,,0294,E2ED
