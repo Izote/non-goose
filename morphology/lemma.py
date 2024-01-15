@@ -8,5 +8,15 @@ if TYPE_CHECKING:
 
 
 class Lemma(Sign):
+    """
+    Represents a single Lemma.
+    """
     def __init__(self, expression: Expression, content: Content = None):
+        """
+        Construct an instance of the Lemma class, and its attributes,
+        inheriting from the Sign class.
+
+        :param expression: an Expression instance.
+        :param content: a Content instance. Defaults to None if not provided.
+        """
         super().__init__(expression=expression, content=content)

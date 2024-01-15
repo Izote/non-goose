@@ -1,6 +1,18 @@
+from __future__ import annotations
+from typing import Any
+
+
 class Content:
-    def __init__(self, gloss: str = None,
-                 data: dict[str, str | int | bool] = None) -> None:
+    """
+    Represents any Content (i.e., what a Sign refers to/references).
+    """
+    def __init__(self, gloss: str = None, data: dict[str, Any] = None) -> None:
+        """
+        Construct an instance of the Content class and its attributes.
+
+        :param gloss: the subject this instance represents.
+        :param data: a dictionary of attributes that quantify the subject.
+        """
         self.gloss = gloss
         self.data = data
 

@@ -31,7 +31,12 @@ class EmicUnit:
     def __getitem__(self, key: str) -> bool | str:
         return getattr(self, key)
 
-    def __get_members(self) -> list:
+    def __get_members(self) -> list[str]:
+        """
+        Returns list of strings for each public member.
+
+        :return: list[str]
+        """
         members = [m for m in getmembers(self) if
                    (m[0] != "symbol" and m[0][0] != "_" and m[0][-1] != "_")]
         members.sort(key=lambda x: self.__SORT_KEY[x[0]])

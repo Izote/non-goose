@@ -17,10 +17,10 @@ class Sign:
         Constructs an instance of the Sign class and its attributes.
 
 
-        :param expression: a list of EmicUnit objects representing the
-            elements of the Sign observable in reality.
+        :param expression: an Expression instance representing the Sign's
+            observable elements.
 
-        :param content: a string designation of what the Sign represents.
+        :param content: a Content instance designating what the Sign refers to.
             Defaults to None, allowing for post-construction assignment.
         """
         self.expression = expression

@@ -9,13 +9,35 @@ if TYPE_CHECKING:
 
 def load_ipa(exclude_manner: list[str] = None,
              exclude_place: list[str] = None) -> DataFrame:
+    """
+    Loads IPA data from local CSV file included in `file` folder.
+
+    :param exclude_manner: manners of articulation to exclude.
+    :param exclude_place: places of articulation to exclude.
+
+    :return: a DataFrame containing one IPA consonants/vowel per row.
+    """
     def parse_voicing(value):
+        """
+        Converts "voicing" (str) to "voiced" (bool).
+
+        :param value: boolean flagging whether the sound is voiced.
+
+        :return: boolean
+        """
         if isinstance(value, str) and value == "voiced":
             return True
         else:
             return False
 
     def parse_rounding(value):
+        """
+        Converts "rounding" (str) to "rounded" (bool).
+
+        :param value: boolean flagging whether the sound if rounded.
+
+        :return: boolean
+        """
         if isinstance(value, str) and value == "rounded":
             return True
         else:

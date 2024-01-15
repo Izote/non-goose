@@ -4,10 +4,18 @@ from .phoneme import Phoneme
 from data.ipa import CONSONANT, VOWEL
 
 
-def get_syllable(allowable: str, rng: Generator):
-    structure = []
+def get_syllable(allowable: str, rng: Generator) -> list[Phoneme]:
+    """
+    Returns a random syllable as a list of Phoneme class instances.
 
+    :param allowable: the maximal allowable syllable in "CV(C)" style format.
+    :param rng: a numpy.random.Generator instance used for randomization.
+
+    :return: list[Phoneme]
+    """
     i = 0
+
+    structure = []
     while i < len(allowable):
         char = allowable[i]
         if char != "(":
