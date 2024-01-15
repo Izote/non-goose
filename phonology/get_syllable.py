@@ -1,9 +1,10 @@
-from random import choice, randint
+from __future__ import annotations
+from numpy.random import Generator
 from .phoneme import Phoneme
 from data.ipa import CONSONANT, VOWEL
 
 
-def get_syllable(allowable: str):
+def get_syllable(allowable: str, rng: Generator):
     structure = []
 
     i = 0
@@ -13,17 +14,17 @@ def get_syllable(allowable: str):
             structure.append(char)
             i += 1
         else:
-            if randint(0, 1) == 1:
+            if rng.choice([True, False]):
                 structure.append(allowable[i + 1])
             i += 3
 
     syllable = []
     for s in structure:
         if s == "C":
-            symbol = choice(CONSONANT)
+            symbol = rng.choice(CONSONANT)
             variable = ("voiced", "place", "manner")
         else:
-            symbol = choice(VOWEL)
+            symbol = rng.choice(VOWEL)
             variable = ("height", "backness", "rounded")
 
         syllable.append(Phoneme(symbol, variable))
