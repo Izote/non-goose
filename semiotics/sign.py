@@ -1,11 +1,11 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 from inspect import getmembers
+from .content import Content
 
 if TYPE_CHECKING:
     from data.unit import EmicUnit
     from .expression import Expression
-    from .content import Content
 
 
 class Sign:
@@ -21,10 +21,13 @@ class Sign:
             observable elements.
 
         :param content: a Content instance designating what the Sign refers to.
-            Defaults to None, allowing for post-construction assignment.
+            Defaults to an empty Content instance for later re-assignment.
         """
         self.expression = expression
-        self.content = content
+        if content is None:
+            self.content = Content()
+        else:
+            self.content = content
 
         self.__expression_keys = [m[0] for m in getmembers(self.expression) if
                                   m[0][0] != "_" and m[0][-1] != "_"]
