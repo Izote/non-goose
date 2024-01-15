@@ -1,5 +1,6 @@
 class Content:
-    def __init__(self, gloss: str, data: dict[str, str | int | bool]) -> None:
+    def __init__(self, gloss: str = None,
+                 data: dict[str, str | int | bool] = None) -> None:
         self.gloss = gloss
         self.data = data
 

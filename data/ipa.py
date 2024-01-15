@@ -36,3 +36,5 @@ def load_ipa(exclude_manner: list[str] = None,
 
 
 IPA = load_ipa(exclude_manner=EXCLUDE_MANNER, exclude_place=EXCLUDE_PLACE)
+CONSONANT = IPA[IPA.ipa_number < 300].symbol.unique().tolist()
+VOWEL = IPA[IPA.ipa_number >= 300].symbol.unique().tolist()
