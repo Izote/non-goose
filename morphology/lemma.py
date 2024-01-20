@@ -11,7 +11,8 @@ class Lemma(Sign):
     """
     Represents a single Lemma.
     """
-    def __init__(self, expression: Expression, content: Content = None):
+    def __init__(self, expression: Expression, structure: list,
+                 content: Content = None) -> None:
         """
         Construct an instance of the Lemma class, and its attributes,
         inheriting from the Sign class.
@@ -20,3 +21,10 @@ class Lemma(Sign):
         :param content: a Content instance. Defaults to None if not provided.
         """
         super().__init__(expression=expression, content=content)
+
+        self.structure = structure
+
+    def __repr__(self) -> str:
+        return (f"Lemma(expression={self.expression}, "
+                f"structure='{self.structure}', content={self.content})")
+

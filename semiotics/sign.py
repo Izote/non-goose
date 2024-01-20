@@ -36,9 +36,7 @@ class Sign:
                                m[0][0] != "_" and m[0][-1] != "_"]
 
     def __repr__(self) -> str:
-        name = self.__class__.__name__
-
-        return f"{name}(expression={self.expression}, content={self.content})"
+        return f"Sign(expression={self.expression}, content={self.content})"
 
     def __getitem__(self, item: str) -> str | int | list[EmicUnit]:
         if item in self.__expression_keys:
@@ -46,4 +44,4 @@ class Sign:
         elif item in self.__content_keys:
             return self.content[item]
         else:
-            raise KeyError(f"'{item}' not a recognized key")
+            getattr(self, item)

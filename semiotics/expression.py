@@ -32,3 +32,6 @@ class Expression:
     def __repr__(self) -> str:
         str_unit = f"'{self.string}'" if self.unit else None
         return f"Expression(string={str_unit})"
+
+    def __getitem__(self, item: str) -> str | list:
+        return getattr(self, item)
