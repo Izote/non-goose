@@ -11,7 +11,7 @@ class Lemma(Sign):
     """
     Represents a single Lemma.
     """
-    def __init__(self, expression: Expression, structure: list,
+    def __init__(self, expression: Expression, structure: str,
                  content: Content = None) -> None:
         """
         Construct an instance of the Lemma class, and its attributes,

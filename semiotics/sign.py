@@ -44,4 +44,4 @@ class Sign:
         elif item in self.__content_keys:
             return self.content[item]
         else:
-            getattr(self, item)
+            return getattr(self, item)
