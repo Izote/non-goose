@@ -9,25 +9,21 @@ class Expression:
     """
     Represents any Expression (i.e., the observable elements of a Sign)
     """
-    def __init__(self, unit: list[EmicUnit] = None,
+    def __init__(self, unit: list[EmicUnit | list[EmicUnit]] = None,
                  string: str = None) -> None:
         """
         Constructs an instance of the Expression class and its attributes.
 
         :param unit: a list of EmicUnit instances, where element order
             corresponds to their real-world sequence. Defaults to None.
-
-        :param string: an optional string for use as the `string` attribute.
         """
         self.unit = unit
 
         if self.unit is None:
             self.string = None
         else:
-            if string is None:
-                self.string = "".join([u.symbol for u in self.unit])
-            else:
-                self.string = string
+            string = "".join([u.symbol for unit in self.unit for u in unit])
+            self.string = string
 
     def __repr__(self) -> str:
         str_unit = f"'{self.string}'" if self.unit else None
