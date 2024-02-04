@@ -4,7 +4,7 @@ from inspect import getmembers
 from .content import Content
 
 if TYPE_CHECKING:
-    from data.unit import EmicUnit
+    from data.unit import Unit
     from .expression import Expression
 
 
@@ -38,7 +38,7 @@ class Sign:
     def __repr__(self) -> str:
         return f"Sign(expression={self.expression}, content={self.content})"
 
-    def __getitem__(self, item: str) -> str | int | list[EmicUnit]:
+    def __getitem__(self, item: str) -> str | int | list[Unit]:
         if item in self.__expression_keys:
             return self.expression[item]
         elif item in self.__content_keys:
