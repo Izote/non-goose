@@ -2,14 +2,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from data.unit import EmicUnit
+    from data.unit import Unit
 
 
 class Expression:
     """
     Represents any Expression (i.e., the observable elements of a Sign)
     """
-    def __init__(self, unit: list[EmicUnit | list[EmicUnit]] = None,
+    def __init__(self, unit: list[Unit | list[Unit]] = None,
                  string: str = None) -> None:
         """
         Constructs an instance of the Expression class and its attributes.
@@ -22,7 +22,7 @@ class Expression:
         if self.unit is None:
             self.string = None
         else:
-            string = "".join([u.symbol for unit in self.unit for u in unit])
+            string = "".join([u.string for unit in self.unit for u in unit])
             self.string = string
 
     def __repr__(self) -> str:
