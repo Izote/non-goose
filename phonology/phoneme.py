@@ -1,22 +1,22 @@
-from data.unit import EmicUnit
+from data.unit import Unit
 from data.ipa import IPA
 
 
-class Phoneme(EmicUnit):
+class Phoneme(Unit):
     """
     Represents a single Phoneme.
     """
-    def __init__(self, symbol: str, variable: tuple[str]) -> None:
+    def __init__(self, string: str, variable: tuple[str]) -> None:
         """
         Constructs an instance of the Phoneme class, and its attributes,
         inheriting from the EmicUnit class.
 
-        :param symbol: the IPA symbol representing the Phoneme.
+        :param string: the IPA symbol representing the Phoneme.
         :param variable: a tuple of variables from the IPA data set to include.
         """
-        super().__init__(symbol=symbol)
+        super().__init__(string=string)
 
-        data = IPA[IPA.symbol == self.symbol].iloc[0, :]
+        data = IPA[IPA.string == self.string].iloc[0, :]
         for var in variable:
             setattr(self, var, data[var])
 
