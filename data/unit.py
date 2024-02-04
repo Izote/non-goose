@@ -1,22 +1,23 @@
 from inspect import getmembers
 
 
-class EmicUnit:
-    __SORT_KEY = {"symbol": 0, "category": 1,
+class Unit:
+    # Allows for fancy-sorting of priority members.
+    __SORT_KEY = {"string": 0, "category": 1,
                   "voiced": 2, "place": 3, "manner": 4,
                   "height": 2, "backness": 3, "rounded": 4}
 
     """Base class representing any kind of Emic unit."""
-    def __init__(self, symbol: str) -> None:
+    def __init__(self, string: str) -> None:
         """
-        Construct an EmicUnit instance including its public `symbol` attribute.
+        Construct a Unit instance including its public `string` attribute.
 
-        :param symbol: a string representation of the instance as an emic unit.
+        :param string: a string representation of the unit's meaning.
         """
-        self.symbol = symbol
+        self.string = string
 
     def __repr__(self) -> str:
-        output = f"{self.__class__.__name__}(symbol='{self.symbol}'"
+        output = f"{self.__class__.__name__}(string='{self.string}'"
         members = self.__get_members()
 
         if len(members) > 0:
@@ -37,8 +38,15 @@ class EmicUnit:
 
         :return: list[str]
         """
+        def sort_members(x):
+            member = x[0]
+            if member in self.__SORT_KEY.keys():
+                return self.__SORT_KEY[member]
+            else:
+                return ord(member[0])
+
         members = [m for m in getmembers(self) if
-                   (m[0] != "symbol" and m[0][0] != "_" and m[0][-1] != "_")]
-        members.sort(key=lambda x: self.__SORT_KEY[x[0]])
+                   (m[0] != "string" and m[0][0] != "_" and m[0][-1] != "_")]
+        members.sort(key=sort_members)
 
         return members
