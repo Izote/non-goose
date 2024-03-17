@@ -13,18 +13,18 @@ class Word:
     def __init__(self, sounds: dict, allow: str, length: int,
                  rng: Generator, gloss: str = None) -> None:
         """
-        Constructs a Word class instance.
+        Constructs A Word class instance.
 
-        :param sounds: a dictionary with uppercase character strings as keys
+        :param sounds: A dictionary with uppercase character strings as keys
             and lists of strings representing IPA characters as values.
 
-        :param allow: the maximal allowable syllable in standard format.
+        :param allow: The maximal allowable syllable in standard format.
 
-        :param length: the Word's desired syllable length.
+        :param length: The Word's desired syllable length.
 
-        :param rng: a numpy.random.Generator instance.
+        :param rng: A numpy.random.Generator instance.
 
-        :param gloss: meaning of the word. Defaults to None.
+        :param gloss: Meaning of the Word. Defaults to None.
         """
         syllable = [Syllable(sounds, allow, rng) for _ in range(length)]
         self.string = ".".join([s.string for s in syllable])
