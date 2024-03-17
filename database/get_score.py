@@ -7,7 +7,7 @@ if TYPE_CHECKING:
     from supabase import Client
 
 
-def get_score(client: Client, gloss: str) -> int:
+def get_score(client: Client, gloss: str) -> float:
     """
     Returns a gloss' score based on its taxonomy properties.
 
@@ -23,4 +23,4 @@ def get_score(client: Client, gloss: str) -> int:
     raw_value = [data[k] for k in data.keys() if k != "gloss"]
 
     # This is a "working" implementation until I have a better idea.
-    return round(10*mean(raw_value))
+    return mean(raw_value)
