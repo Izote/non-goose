@@ -4,7 +4,7 @@ if TYPE_CHECKING:
     from supabase import Client
 
 
-def query(client: Client, table: str,
+def query(client: Client, table: str, key: str,
           select: str = None, where: tuple = None,
           insert: dict = None) -> list | None:
     """
@@ -12,13 +12,13 @@ def query(client: Client, table: str,
 
     :param client: currently a supabase Client.
     :param table:  the name of the target database table.
+    :param key: primary key on the target table.
     :param select: string selecting columns in 'a' or 'a, b' format.
     :param where: (x, y) tuple setting a WHERE x = y clause.
     :param insert: a dictionary of row-level data in column, value pairs.
 
     :return: SELECT statement results as a list of dictionaries or None.
     """
-    key = "concept"
     tbl = client.table(table)
 
     if select and not where:
