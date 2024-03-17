@@ -14,14 +14,15 @@ class Syllable:
         """
         Constructs a Syllable class instance.
 
-        :param sounds: a dictionary with uppercase character strings as keys
+        :param sounds: A dictionary with uppercase character strings as keys
             and lists of strings representing IPA characters as values.
 
-        :param allow: the maximal allowable syllable in standard format.
+        :param allow: The maximal allowable Syllable in
+            customary "C(C)V(C)" style format.
 
-        :param rng: a numpy.random.Generator instance.
+        :param rng: A numpy.random.Generator instance.
         """
-        self.__structure = self.__get_pattern(allow, rng)
+        self.__structure = self.__get_structure(allow, rng)
         self.__string = self.__get_string(sounds, rng)
 
     def __repr__(self) -> str:
@@ -40,15 +41,16 @@ class Syllable:
     def string(self) -> str:
         return self.__string
 
-    def __get_pattern(self, allow: str, rng: Generator) -> str:
+    def __get_structure(self, allow: str, rng: Generator) -> str:
         """
-        Return a morphology pattern for word generation.
+        Return an allowable Syllable structure.
 
-        :param allow: the maximal allowable syllable in standard format.
+        :param allow: The maximal allowable Syllable in
+            customary "C(C)V(C)" style format.
 
-        :param rng: a numpy.random.Generator instance.
+        :param rng: A numpy.random.Generator instance.
 
-        :return: an allowable morphology structure as a string.
+        :return: An allowable morphology structure as a string.
         """
         key = []
         required = []
@@ -73,14 +75,15 @@ class Syllable:
 
     def __get_string(self, sounds: dict, rng: Generator) -> str:
         """
-        Return a string of IPA characters based on chosen morphology structure.
+        Return a string of IPA characters that fit the Syllable's structure.
 
-        :param sounds: a dictionary with uppercase character strings as keys
-            and lists of strings representing IPA characters as values.
+        :param sounds: A dictionary of lists with uppercase characters as keys.
+            Each key represents an alias for a particular set of sounds and
+            each list contains IPA character strings.
 
-        :param rng: a numpy.random.Generator instance.
+        :param rng: A numpy.random.Generator instance.
 
-        :return: a string of IPA characters.
+        :return: A string of IPA characters.
         """
         string = [rng.choice(sounds[s]) for s in self.__structure]
         string = "".join(string)
