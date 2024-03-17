@@ -10,12 +10,12 @@ def query(client: Client, table: str, key: str,
     """
     Execute one of several basic queries against the desired database table.
 
-    :param client: currently a supabase Client.
-    :param table:  the name of the target database table.
-    :param key: primary key on the target table.
-    :param select: string selecting columns in 'a' or 'a, b' format.
+    :param client: Currently, a supabase.Client instance.
+    :param table:  The name of the target database table.
+    :param key: Primary key on the target table.
+    :param select: SELECT statement columns in 'a' or 'a, b' string format.
     :param where: (x, y) tuple setting a WHERE x = y clause.
-    :param insert: a dictionary of row-level data in column, value pairs.
+    :param insert: A dictionary of row-level data in column, value pairs.
 
     :return: SELECT statement results as a list of dictionaries or None.
     """
