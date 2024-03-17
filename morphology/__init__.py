@@ -1,1 +1,2 @@
-from .lemma import Lemma
+from .syllable import Syllable
+from .word import Word
