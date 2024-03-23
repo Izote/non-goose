@@ -1,2 +1,2 @@
 # non-goose
-Non-goose is a generator tool for constructed languages.
+Non-goose is a growing personal toolkit for creating constructed languages.
