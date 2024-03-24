@@ -41,23 +41,31 @@ cog = st.checkbox(text[5])
 per = st.checkbox(text[6])
 tran = st.checkbox(text[7])
 
+password = st.text_input("Enter password for database write-access.",
+                         type="password")
+
 submit = st.button("Submit")
 
 if submit:
-    new_data = {"gloss": gloss.lower(),
-                "autonomous": int(auto),
-                "mobile": int(mobile),
-                "corporeal": int(corp),
-                "countable": int(count),
-                "subtle": int(sub),
-                "cognitive": int(cog),
-                "visible": int(not per),
-                "other_perception": int(per),
-                "transforms": int(tran)}
+    if password == st.secrets["PASSWORD"]:
+        new = {"gloss": gloss.lower(),
+               "autonomous": int(auto),
+               "mobile": int(mobile),
+               "corporeal": int(corp),
+               "countable": int(count),
+               "subtle": int(sub),
+               "cognitive": int(cog),
+               "visible": int(not per),
+               "other_perception": int(per),
+               "transforms": int(tran)}
 
-    if gloss.lower() != "gloss":
-        try:
-            client.table("properties").insert(new_data, count="None").execute()
-            st.write(f"Properties for `{gloss}` added to database!")
-        except Exception as e:
-            st.write(e)
+        if gloss.lower() != "gloss":
+            try:
+                client.table("properties").insert(new, count="None").execute()
+                st.write(f"Properties for `{gloss}` added to database!")
+            except Exception as e:
+                st.write(e)
+    elif password == "" or password is None:
+        st.write("Please enter the password!")
+    else:
+        st.write("Incorrect password!")
