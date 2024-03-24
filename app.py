@@ -12,7 +12,7 @@ def load_table():
     return st.dataframe(row_data, column_order=col_order)
 
 
-client = st.connection("conlang", type=SupabaseConnection)
+client = st.connection("ng", type=SupabaseConnection)
 
 display_header = st.header("Existing Properties")
 st.write("This section displays properties currently stored in the database.")
