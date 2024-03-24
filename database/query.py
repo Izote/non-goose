@@ -4,38 +4,37 @@ if TYPE_CHECKING:
     from supabase import Client
 
 
-def query(client: Client, table: str, key: str,
-          select: str = None, where: tuple = None,
-          insert: dict = None) -> list | None:
+def query(client: Client, table: str,
+          select: str | list = None,
+          insert: dict = None,
+          where: tuple = None):
     """
-    Execute one of several basic queries against the desired database table.
+    Execute a query against a given table.
 
-    :param client: Currently, a supabase.Client instance.
-    :param table:  The name of the target database table.
-    :param key: Primary key on the target table.
-    :param select: SELECT statement columns in 'a' or 'a, b' string format.
-    :param where: (x, y) tuple setting a WHERE x = y clause.
-    :param insert: A dictionary of row-level data in column, value pairs.
+    :param client: A `supabase.Client` instance.
+    :param table: ...
+    :param select: A string "*" or string/list of columns may be passed.
+    :param insert: A dictionary of column, value pairs.
+    :param where: A tuple of format ("x", "=", "y").
 
-    :return: SELECT statement results as a list of dictionaries or None.
+    :return: query result set as ...
     """
-    tbl = client.table(table)
+    q = client.table(table)
 
-    if select and not where:
-        response = tbl.select(select).execute()
-    elif select and where:
-        response = tbl.select(select).eq(where[0], where[1]).execute()
-    elif insert:
-        response = tbl.select("*").eq(key, insert[key]).execute()
-    else:
-        raise NotImplementedError("only one SQL statement per query allowed")
+    if isinstance(select, list) or isinstance(select, str):
+        if insert:
+            return ValueError("`insert` must be None if `select` is provided.")
+        q = q.select(select if isinstance(select, str) else ", ".join(select))
 
-    if select:
-        return response.data
-    else:
-        if not response.data:
-            tbl.insert(insert).execute()
+    if isinstance(insert, dict):
+        if select:
+            return ValueError("`select` must be None if `insert` is provided.")
+        q = q.insert(insert)
+
+    if isinstance(where, tuple):
+        if where[1] == "=":
+            q = q.eq(where[0], where[2])
         else:
-            msg = f"'{insert[key]}' row already exists in table '{table}'"
+            raise NotImplementedError
 
-            raise ValueError(msg)
+    return q.execute()
